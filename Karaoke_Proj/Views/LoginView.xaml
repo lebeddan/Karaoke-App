@@ -1,0 +1,37 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             xmlns:vm="clr-namespace:Karaoke_Proj.ViewModels"
+             x:Class="Karaoke_Proj.Views.LoginView"
+             BackgroundColor="{AppThemeBinding Dark={StaticResource SystemGray5Dark}, Light={StaticResource WindowBackgroundColor}}">
+    
+    <ContentPage.Content>
+        <StackLayout Orientation="Vertical" Padding="30" Spacing="40">
+            <Frame BackgroundColor="{AppThemeBinding Dark={StaticResource SystemBlue}, Light={StaticResource DefaultBackgroundShell}}" HasShadow="False">
+                <StackLayout Orientation="Vertical" Spacing="10">
+                    <Entry x:Name="Login" 
+                           Text="{Binding Login, Mode=TwoWay}"
+                           Placeholder="login"
+                           Keyboard="Default"
+                           HeightRequest="40"
+                           TextColor="{AppThemeBinding Dark={StaticResource TextColorDark}, Light={StaticResource TextColor}}"/>
+
+                    <Entry x:Name="Password" 
+                           Text="{Binding Password, Mode=TwoWay}"
+                           Placeholder="password"
+                           IsPassword="true"
+                           Keyboard="Default"
+                           HeightRequest="40"
+                           TextColor="{AppThemeBinding Dark={StaticResource TextColorDark}, Light={StaticResource TextColor}}"/>
+                </StackLayout>
+            </Frame>
+            <Button Command="{Binding SubmitCommand}"
+                    Text="Login"
+                    TextColor="{AppThemeBinding Dark={StaticResource TextColorDark}, Light={StaticResource TextColor}}"
+                    FontAttributes="Bold"
+                    FontSize="Large"
+                    HorizontalOptions="FillAndExpand"
+                    BackgroundColor="{AppThemeBinding Dark={StaticResource SystemBlue}, Light={StaticResource DefaultBackgroundShell}}"/>
+        </StackLayout>
+    </ContentPage.Content>
+</ContentPage>

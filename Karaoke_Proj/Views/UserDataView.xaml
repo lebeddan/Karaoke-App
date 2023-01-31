@@ -1,0 +1,27 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             xmlns:vm ="clr-namespace:Karaoke_Proj.ViewModels"
+             x:Class="Karaoke_Proj.Views.UserDataView">
+    
+    <ContentPage.Content>
+        <StackLayout Spacing="10" 
+                     HorizontalOptions="Start" 
+                     WidthRequest="250">
+            <Label Text="Login:" FontAttributes="Bold"/>
+            <Entry Text="{Binding Login, Mode=TwoWay}" Placeholder="username"/>
+
+            <Label Text="Password:" FontAttributes="Bold"/>
+            <Entry Text="{Binding Password, Mode=TwoWay}" Placeholder="login" IsPassword="true"/>
+            
+            <StackLayout Orientation="Horizontal">
+                <Button Text="Save" 
+                        HorizontalOptions="StartAndExpand" 
+                        Command="{Binding SaveCommand}"/>
+                <Button Text="Cancel" 
+                        HorizontalOptions="EndAndExpand" 
+                        Command="{Binding CancelCommand}"/>
+            </StackLayout>
+        </StackLayout>
+    </ContentPage.Content>
+</ContentPage>

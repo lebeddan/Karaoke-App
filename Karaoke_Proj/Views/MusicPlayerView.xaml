@@ -1,0 +1,106 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             xmlns:progressBar="clr-namespace:Syncfusion.XForms.ProgressBar;assembly=Syncfusion.SfProgressBar.XForms"
+             xmlns:model="clr-namespace:Karaoke_Proj"
+             x:Class="Karaoke_Proj.Views.MusicPlayerView"
+             BackgroundColor="{DynamicResource BackgroundPlayer}"
+             Shell.TabBarIsVisible="true">
+    
+    <ContentPage.Content>
+        <StackLayout Orientation="Vertical" Padding="30" Spacing="40">
+            <Grid HorizontalOptions="FillAndExpand">
+                <Button
+                        WidthRequest ="40"
+                        HeightRequest ="40"
+                        CornerRadius ="20"
+                        VerticalOptions ="Center"
+                        HorizontalOptions ="Start"
+                        BackgroundColor ="{DynamicResource BackgroundPlayer}"
+                        Opacity="15"
+                        ImageSource="ic_close24"
+                        Command="{Binding CloseCommand}"/>
+                <Button
+                        WidthRequest ="40"
+                        HeightRequest ="40"
+                        CornerRadius ="20"
+                        VerticalOptions ="Center"
+                        HorizontalOptions ="End"
+                        BackgroundColor ="{DynamicResource BackgroundPlayer}"
+                        Opacity="15"
+                        ImageSource="ic_share24"
+                        Command="{Binding ShareCommand}"/>
+            </Grid>
+            <StackLayout HeightRequest="500">
+                <ScrollView Orientation="Vertical" VerticalOptions="FillAndExpand" x:Name="scrollView">
+                    <StackLayout Orientation="Vertical" VerticalOptions="FillAndExpand" WidthRequest="150">
+                        <Label x:Name="lyricsLabel" 
+                               Text="{Binding SelectedSong.Lyrics}"
+                               HorizontalTextAlignment="Center"
+                               VerticalTextAlignment="Center"
+                               HorizontalOptions="Center" 
+                               FontSize="{DynamicResource LyricsSize}"
+                               TextColor="{DynamicResource LyricsColor}"/>
+                    </StackLayout>
+                </ScrollView>
+            </StackLayout>
+
+
+            <StackLayout WidthRequest="250"  HorizontalOptions="Center">
+                <Slider 
+                        MinimumTrackColor="#D4420C"
+                        MaximumTrackColor="#C0C8D4" 
+                        ThumbColor="#D4420C" 
+                        Value="{Binding Position.TotalSeconds}" 
+                        DragCompleted="Slider_DragCompleted"
+                        Maximum="{Binding Max}" 
+                        HorizontalOptions="FillAndExpand"/>
+                <Grid HorizontalOptions="FillAndExpand">
+                    <Label Text="{Binding Position, StringFormat='{0:mm\\:ss}'}" 
+                           FontSize="12" 
+                           HorizontalOptions="Start" 
+                           VerticalOptions="Center"/>
+                    <Label Text="{Binding Duration, StringFormat='{0:mm\\:ss}'}" 
+                           FontSize="12" 
+                           HorizontalOptions="End" 
+                           VerticalOptions="Center"/>
+                </Grid>
+            </StackLayout>
+
+            <StackLayout HorizontalOptions="Center" WidthRequest="250">
+                <Grid HorizontalOptions="FillAndExpand">
+                    <Button
+                            WidthRequest ="40"
+                            HeightRequest ="40"
+                            CornerRadius ="20"
+                            VerticalOptions ="Center"
+                            HorizontalOptions ="Center"
+                            BackgroundColor ="{DynamicResource BackgroundPlayer}"
+                            Opacity="15"
+                            ImageSource="{Binding PlayIcon}"
+                            Command="{Binding PlayCommand}"/>
+                    <Button
+                            WidthRequest ="40"
+                            HeightRequest ="40"
+                            CornerRadius ="20"
+                            VerticalOptions ="Center"
+                            HorizontalOptions="Start"
+                            BackgroundColor ="{DynamicResource BackgroundPlayer}"
+                            Opacity="15"
+                            ImageSource="{Binding RecordIcon}"
+                            Command="{Binding RecordCommand}"/>
+                    <Button
+                            WidthRequest ="40"
+                            HeightRequest ="40"
+                            CornerRadius ="20"
+                            VerticalOptions ="Center"
+                            HorizontalOptions="End"
+                            BackgroundColor ="{DynamicResource BackgroundPlayer}"
+                            Opacity="15"
+                            ImageSource="{Binding FavoriteIcon}"
+                            Command="{Binding FavoriteCommand}"/>
+                </Grid>
+            </StackLayout>
+        </StackLayout>
+    </ContentPage.Content>
+</ContentPage>

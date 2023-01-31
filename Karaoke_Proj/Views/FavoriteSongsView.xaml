@@ -1,0 +1,60 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             xmlns:vm="clr-namespace:Karaoke_Proj.ViewModels"
+             xmlns:model="clr-namespace:Karaoke_Proj"
+             x:Class="Karaoke_Proj.Views.FavoriteSongsView"
+             BackgroundColor="{AppThemeBinding Dark={StaticResource SystemGray5Dark}, Light={StaticResource WindowBackgroundColor}}"
+             Title="Songs">
+    
+    <ContentPage.Content>
+        <StackLayout>
+            <RefreshView x:DataType="vm:MainViewModel" 
+                         Command="{Binding LoadSongsCommand}" 
+                         IsRefreshing="{Binding IsBusy, Mode=TwoWay}">
+
+                <CollectionView x:Name="ItemsListView" 
+                                ItemsSource="{Binding FavoriteSongsList}" 
+                                SelectedItem="{Binding SelectedSong}"
+                                x:DataType="vm:MainViewModel"
+                                SelectionChangedCommand="{Binding SelectionCommand}"
+                                SelectionMode="Single"
+                                Visual="Material">
+                    <CollectionView.ItemTemplate>
+                        <DataTemplate>
+                            <StackLayout>
+                                <StackLayout Padding="15" x:DataType="model:Song" Orientation="Horizontal">
+                                    <Image Source="{Binding Img}" 
+                                           Margin="10,0,15,0" 
+                                           WidthRequest="24" 
+                                           HeightRequest="24"/>
+                                    
+                                    <StackLayout>
+                                        <Label  Text="{Binding SongName}" 
+                                                LineBreakMode="NoWrap" 
+                                                FontSize="16" 
+                                                FontAttributes="Bold"
+                                                TextColor="{AppThemeBinding Dark={StaticResource TextColorDark}, Light={StaticResource TextColor}}"/>
+                                        <Label  Text="{Binding SongAuthor}" 
+                                                LineBreakMode="NoWrap"
+                                                FontSize="13" 
+                                                TextColor="{AppThemeBinding Dark={StaticResource TextColorDark}, Light={StaticResource TextColor}}"/>
+                                    </StackLayout>
+                                    
+                                    <StackLayout x:DataType="vm:MainViewModel"
+                                                 HorizontalOptions="EndAndExpand" 
+                                                 Padding="10,0,30,0" >
+                                        <Image   x:Name="btnPlay" 
+                                                 Source="ic_play36" 
+                                                 WidthRequest="36" 
+                                                 HeightRequest="36"/>
+                                    </StackLayout>
+                                </StackLayout>
+                            </StackLayout>
+                        </DataTemplate>
+                    </CollectionView.ItemTemplate>
+                </CollectionView>
+            </RefreshView>
+        </StackLayout>
+    </ContentPage.Content>
+</ContentPage>

@@ -1,0 +1,267 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             xmlns:vm="clr-namespace:Karaoke_Proj.ViewModels"
+             xmlns:hlp="clr-namespace:Karaoke_Proj.Helpers"
+             xmlns:converter="clr-namespace:Karaoke_Proj.Converters"
+             x:Class="Karaoke_Proj.Views.UserInfoView"
+             Title="User Settings"
+             BackgroundColor="{AppThemeBinding Dark={StaticResource SystemGray5Dark}, Light={StaticResource WindowBackgroundColor}}">
+    <ContentPage.Resources>
+        <converter:ColorConverter x:Key="ColorConverter"/>
+
+        <ControlTemplate x:Key="RadioButtonTemplate">
+            <Frame BorderColor="#F3F2F1"
+                   BackgroundColor="#F3F2F1"
+                   HasShadow="False"
+                   HeightRequest="100"
+                   WidthRequest="100"
+                   HorizontalOptions="Start"
+                   VerticalOptions="Start"
+                   Padding="0">
+                <VisualStateManager.VisualStateGroups>
+                    <VisualStateGroupList>
+                        <VisualStateGroup x:Name="CheckedStates">
+                            <VisualState x:Name="Checked">
+                                <VisualState.Setters>
+                                    <Setter Property="BorderColor"
+                                            Value="{AppThemeBinding Dark={StaticResource CardBackgroundDark}, Light={StaticResource CardBackground}}" />
+                                    <Setter TargetName="check"
+                                            Property="Opacity"
+                                            Value="1" />
+                                </VisualState.Setters>
+                            </VisualState>
+                            <VisualState x:Name="Unchecked">
+                                <VisualState.Setters>
+                                    <Setter Property="BackgroundColor"
+                                             Value="{AppThemeBinding Dark={StaticResource CardBackgroundDark}, Light={StaticResource CardBackground}}"  />
+                                    <Setter Property="BorderColor"
+                                            Value="#F3F2F1" />
+                                    <Setter TargetName="check"
+                                            Property="Opacity"
+                                            Value="0" />
+                                </VisualState.Setters>
+                            </VisualState>
+                        </VisualStateGroup>
+                    </VisualStateGroupList>
+                </VisualStateManager.VisualStateGroups>
+                <Grid Margin="4"
+                      WidthRequest="100">
+                    <Grid WidthRequest="18"
+                          HeightRequest="18"
+                          HorizontalOptions="End"
+                          VerticalOptions="Start">
+                        <Ellipse Stroke="Blue"
+                                 Fill="White"
+                                 WidthRequest="16"
+                                 HeightRequest="16"
+                                 HorizontalOptions="Center"
+                                 VerticalOptions="Center" />
+                        <Ellipse x:Name="check"
+                                 Fill="Blue"
+                                 WidthRequest="8"
+                                 HeightRequest="8"
+                                 HorizontalOptions="Center"
+                                 VerticalOptions="Center" />
+                    </Grid>
+                    <ContentPresenter />
+                </Grid>
+            </Frame>
+        </ControlTemplate>
+
+        <Style TargetType="RadioButton">
+            <Setter Property="ControlTemplate"
+                    Value="{StaticResource RadioButtonTemplate}" />
+        </Style>
+    </ContentPage.Resources>
+
+    <ContentPage.Content>
+        <StackLayout Orientation="Vertical">
+            <StackLayout HorizontalOptions="Center" HeightRequest="110">
+                <TableView Intent="Settings">
+                    <TableRoot>
+                        <TableSection Title="My settings" 
+                                      TextColor="{AppThemeBinding Dark={StaticResource TextColorDark}, Light={StaticResource TextColor}}">
+                            <EntryCell Label="Username: " 
+                                       LabelColor="{AppThemeBinding Dark={StaticResource TextColorDark}, Light={StaticResource TextColor}}"
+                                       Placeholder="{Binding Login, Mode=TwoWay}" 
+                                       IsEnabled="False"/>
+                        </TableSection>
+                    </TableRoot>
+                </TableView>
+            </StackLayout>
+
+            <StackLayout HorizontalOptions="Center" HeightRequest="150">
+                <TableView Intent="Settings" HeightRequest="50">
+                    <TableRoot>
+                        <TableSection Title="Apperance" 
+                                      TextColor="{AppThemeBinding Dark={StaticResource TextColorDark}, Light={StaticResource TextColor}}">
+                        </TableSection>
+                    </TableRoot>
+                </TableView>
+
+                <StackLayout Orientation="Horizontal" 
+                             HorizontalOptions="Center" 
+                             HeightRequest="100">
+                    <RadioButton x:Name="SystemRadioBtn"
+                                 Value="System"
+                                 CheckedChanged="RadioButton_CheckedChanged">
+                        <RadioButton.Content>
+                            <StackLayout>
+                                <Image Source="ic_smartphone36.png"
+                                       HorizontalOptions="Center"
+                                       VerticalOptions="CenterAndExpand" />
+                                <Label Text="System"
+                                       HorizontalOptions="Center"
+                                       VerticalOptions="End" 
+                                       TextColor="{AppThemeBinding Dark={StaticResource TextColorDark}, Light={StaticResource TextColor}}"/>
+                            </StackLayout>
+                        </RadioButton.Content>
+                    </RadioButton>
+
+                    <RadioButton x:Name="NightRadioBtn" 
+                                 Value="Night"
+                                 CheckedChanged="RadioButton_CheckedChanged">
+                        <RadioButton.Content>
+                            <StackLayout>
+                                <Image Source="ic_light_filled36.png"
+                                       HorizontalOptions="Center"
+                                       VerticalOptions="CenterAndExpand" />
+
+                                <Label Text="Night"
+                                       HorizontalOptions="Center"
+                                       VerticalOptions="End" 
+                                       TextColor="{AppThemeBinding Dark={StaticResource TextColorDark}, Light={StaticResource TextColor}}"/>
+                            </StackLayout>
+                        </RadioButton.Content>
+                    </RadioButton>
+
+                    <RadioButton x:Name="LightRadioBtn" 
+                                 Value="Light"
+                                 CheckedChanged="RadioButton_CheckedChanged">
+                        <RadioButton.Content>
+                            <StackLayout>
+                                <Image Source="ic_light_outlined36.png"
+                                       HorizontalOptions="Center"
+                                       VerticalOptions="CenterAndExpand" />
+
+                                <Label Text="Light"
+                                       HorizontalOptions="Center"
+                                       VerticalOptions="End"
+                                       TextColor="{AppThemeBinding Dark={StaticResource TextColorDark}, Light={StaticResource TextColor}}"/>
+                            </StackLayout>
+                        </RadioButton.Content>
+                    </RadioButton>
+                </StackLayout>
+            </StackLayout>
+
+            <StackLayout Orientation="Vertical" 
+                         HorizontalOptions="Center" 
+                         VerticalOptions="CenterAndExpand" 
+                         HeightRequest="250">
+                <TableView Intent="Settings" HeightRequest="50">
+                    <TableRoot>
+                        <TableSection Title="Music Player Settings" 
+                                      TextColor="{AppThemeBinding Dark={StaticResource TextColorDark}, Light={StaticResource TextColor}}">
+                        </TableSection>
+                    </TableRoot>
+                </TableView>
+
+                <StackLayout Orientation="Horizontal" 
+                             Margin="10,0,0,0" 
+                             WidthRequest="150" 
+                             HeightRequest="70">
+                    <Grid>
+                        <Grid.ColumnDefinitions>
+                            <ColumnDefinition Width="*" />
+                            <ColumnDefinition Width="*" />
+                        </Grid.ColumnDefinitions>
+                    </Grid>
+
+                    <StackLayout Grid.Column="0" 
+                                 VerticalOptions="Start" 
+                                 HeightRequest="40">
+                        <Label Text="Background color: " 
+                               VerticalOptions="CenterAndExpand"
+                               TextColor="{AppThemeBinding Dark={StaticResource TextColorDark}, Light={StaticResource TextColor}}"></Label>
+                    </StackLayout>
+                    <StackLayout Grid.Column="1" 
+                                 Orientation="Horizontal" 
+                                 HorizontalOptions="FillAndExpand" 
+                                 VerticalOptions="Start" 
+                                 HeightRequest="40">
+                        <Picker Title="Colors" 
+                                TextColor="{AppThemeBinding Dark={StaticResource TextColorDark}, Light={StaticResource TextColor}}"
+                                ItemsSource="{Binding ColorList}" 
+                                ItemDisplayBinding="{Binding name}"
+                                SelectedItem="{Binding SelectedColor}"/>
+                    </StackLayout>
+                </StackLayout>
+
+                <StackLayout Orientation="Horizontal" 
+                             Margin="10,0,0,0" 
+                             WidthRequest="150" 
+                             HeightRequest="70">
+                    <Grid>
+                        <Grid.ColumnDefinitions>
+                            <ColumnDefinition Width="*" />
+                            <ColumnDefinition Width="*" />
+                        </Grid.ColumnDefinitions>
+                    </Grid>
+                    <StackLayout Grid.Column="0"   VerticalOptions="Start" HeightRequest="40">
+                        <Label  Text="Text color: " 
+                                VerticalOptions="CenterAndExpand"
+                                TextColor="{AppThemeBinding Dark={StaticResource TextColorDark}, Light={StaticResource TextColor}}"></Label>
+                    </StackLayout>
+                    <StackLayout Grid.Column="1" 
+                                 Margin="45,0,0,0" 
+                                 Orientation="Horizontal"  
+                                 HorizontalOptions="FillAndExpand" 
+                                 VerticalOptions="Start" 
+                                 HeightRequest="40">
+                        <Picker Title="Colors" 
+                                TextColor="{AppThemeBinding Dark={StaticResource TextColorDark}, Light={StaticResource TextColor}}"
+                                ItemsSource="{Binding ColorList}" 
+                                ItemDisplayBinding="{Binding name}"
+                                SelectedItem="{Binding SelectedColor1}"/>
+                    </StackLayout>
+                </StackLayout>
+
+                <StackLayout Orientation="Horizontal" 
+                             Margin="10,0,0,0" 
+                             WidthRequest="150" 
+                             HeightRequest="80">
+                    <Grid>
+                        <Grid.ColumnDefinitions>
+                            <ColumnDefinition Width="*" />
+                            <ColumnDefinition Width="*" />
+                        </Grid.ColumnDefinitions>
+                    </Grid>
+                    <StackLayout Grid.Column="0"   VerticalOptions="Start" HeightRequest="40">
+                        <Label  Text="Lyrics font size: " 
+                                VerticalOptions="CenterAndExpand"
+                                TextColor="{AppThemeBinding Dark={StaticResource TextColorDark}, Light={StaticResource TextColor}}"></Label>
+                    </StackLayout>
+                    <StackLayout Grid.Column="1"  
+                                 Margin="15,0,0,0" 
+                                 Orientation="Horizontal"  
+                                 HorizontalOptions="FillAndExpand"
+                                 VerticalOptions="Start" 
+                                 HeightRequest="40">
+                        <Entry  PlaceholderColor="#C7C7C7" 
+                                FontSize="18"  
+                                TextColor="#C7C7C7"
+                                Text="{Binding TextLyricsSize}"/>
+                    </StackLayout>
+                </StackLayout>
+            </StackLayout>
+
+            <StackLayout HorizontalOptions="Center" VerticalOptions="EndAndExpand">
+                <Button Margin="0,0,0,18" 
+                        Text="Change login data" 
+                        Command="{Binding ChangeCommand}"
+                        BackgroundColor="{AppThemeBinding Dark={StaticResource SystemBlue}, Light={StaticResource DefaultBackgroundShell}}"/>
+            </StackLayout>
+        </StackLayout>
+    </ContentPage.Content>
+</ContentPage>

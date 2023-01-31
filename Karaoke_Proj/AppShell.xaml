@@ -1,0 +1,52 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<Shell xmlns="http://xamarin.com/schemas/2014/forms"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             xmlns:views="clr-namespace:Karaoke_Proj.Views"
+             xmlns:vm="clr-namespace:Karaoke_Proj.ViewModels" 
+             x:Class="Karaoke_Proj.AppShell"
+             BackgroundColor="{AppThemeBinding Dark={StaticResource SystemBlue}, Light={StaticResource DefaultBackgroundShell}}">
+
+    <Shell.Resources>
+        <Color x:Key="NavigationPrimary">#2196F3</Color>
+        <Style x:Key="DefaultBaseStyle" TargetType="Element">
+            <Setter Property="Shell.BackgroundColor" Value="{AppThemeBinding Light={StaticResource DefaultBackgroundShell}, Dark={StaticResource SystemBlue}}" />
+            <Setter Property="Shell.ForegroundColor" Value="Red" />
+            <Setter Property="Shell.TitleColor" Value="Black" />
+            <Setter Property="Shell.DisabledColor" Value="Gray" />
+            <Setter Property="Shell.UnselectedColor" Value="Gray" />
+            <Setter Property="Shell.TabBarBackgroundColor" Value="{StaticResource NavigationPrimary}" />
+            <Setter Property="Shell.TabBarForegroundColor" Value="Black"/>
+            <Setter Property="Shell.TabBarUnselectedColor" Value="Black"/>
+            <Setter Property="Shell.TabBarTitleColor" Value="Black"/>
+        </Style>
+
+        <Style x:Key="Default" TargetType="Element">
+            <Setter Property="Shell.TabBarBackgroundColor" Value="{AppThemeBinding Light={StaticResource DefaultBackgroundShell}, Dark={StaticResource SystemBlue}}"></Setter>
+            <Setter Property="Shell.TabBarDisabledColor" Value="Black"></Setter>
+            <Setter Property="Shell.TabBarForegroundColor" Value="Red"></Setter>
+            <Setter Property="Shell.TabBarTitleColor" Value="Black"></Setter>
+            <Setter Property="Shell.TabBarUnselectedColor" Value="{AppThemeBinding Light={StaticResource SystemGrayDark}, Dark={StaticResource WindowBackgroundColorDark}}"></Setter>
+        </Style>
+
+        <Style TargetType="ShellItem" BasedOn="{StaticResource DefaultBaseStyle}" />
+        <Style TargetType="TabBar" BasedOn="{StaticResource Default}" />
+    </Shell.Resources>
+    
+    <TabBar Route="login">
+        <Tab Route="loginPage">
+            <Shell.NavBarIsVisible>false</Shell.NavBarIsVisible>
+            <ShellContent ContentTemplate="{DataTemplate views:LoginView}"/>
+        </Tab>
+    </TabBar>
+    
+    <TabBar Route="home">
+        <Tab Title="Song List" Icon="ic_playlist" Route="songsPage">
+            <ShellContent Title="Songs" ContentTemplate="{DataTemplate views:SongListView}"></ShellContent>
+            <ShellContent Title="Favorite" ContentTemplate="{DataTemplate views:FavoriteSongsView}"></ShellContent>
+            <ShellContent Title="Sessions" ContentTemplate="{DataTemplate views:SessionsView}"></ShellContent>
+        </Tab>
+        <Tab Title="User" Icon="ic_user" Route="settingsPage">
+            <ShellContent Title="User" ContentTemplate="{DataTemplate views:UserInfoView}"></ShellContent>
+        </Tab>
+    </TabBar>
+</Shell>
